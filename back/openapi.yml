@@ -1,0 +1,161 @@
+openapi: 3.0.0
+info:
+  title: API de Usuario
+  description: API para gestionar información de usuarios.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+security:
+  - basicAuth: []
+paths:
+  /api/user:
+    get:
+      summary: Obtener la información del usuario
+      description: Retorna la información del usuario por defecto.
+      security: []
+      responses:
+        '200':
+          description: Información del usuario
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  names:
+                    type: string
+                    example: Serena Luna
+                  lastNames:
+                    type: string
+                    example: Sepulveda Vega
+                  rut:
+                    type: integer
+                    example: 11111111
+                  dv:
+                    type: string
+                    example: "9"
+                  birthdate:
+                    type: string
+                    format: date
+                    example: "2023-07-01"
+                  email:
+                    type: string
+                    example: camver2702@gmail.com
+                  password:
+                    type: string
+                    example: password
+    post:
+      summary: Crear un nuevo usuario
+      description: Permite crear un nuevo usuario con los datos proporcionados.
+      security:
+        - basicAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                names:
+                  type: string
+                lastNames:
+                  type: string
+                rut:
+                  type: integer
+                dv:
+                  type: string
+                birthdate:
+                  type: string
+                  format: date
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - names
+                - lastNames
+                - rut
+                - dv
+                - birthdate
+                - email
+                - password
+      responses:
+        '201':
+          description: Usuario creado con éxito
+        '400':
+          description: Error en la creación del usuario
+        '500':
+          description: Error en el servidor
+    put:
+      summary: Modificar un usuario
+      description: Permite modificar un usuario con los datos proporcionados.
+      security:
+        - basicAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                names:
+                  type: string
+                lastNames:
+                  type: string
+                rut:
+                  type: integer
+                dv:
+                  type: string
+                birthdate:
+                  type: string
+                  format: date
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - names
+                - lastNames
+                - rut
+                - dv
+                - birthdate
+                - email
+                - password
+      responses:
+        '201':
+          description: Usuario modificado con éxito
+        '400':
+          description: Error en la modificado del usuario
+        '500':
+          description: Error en el servidor
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        names:
+          type: string
+        lastNames:
+          type: string
+        rut:
+          type: integer
+        dv:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        email:
+          type: string
+        password:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
